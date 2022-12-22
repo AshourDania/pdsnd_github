@@ -7,7 +7,9 @@
 Bikeshare
 
 ### Description
-bike share system provider for many major cities in the United States, to uncover bike share usage patterns
+bike-share system provider for many major cities in the United States in 
+Chicago, Washington, and New york city. make the user explore bike-share program data for each city.
+by each month and day. And calculating the most popular by time or station of each city.
 
 ### Files used
 chicago.csv
