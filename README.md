@@ -19,3 +19,6 @@ washington.csv
 ### Credits
 It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
 
+### About me
+ Data science student at University of Jeddah, I'm passionate about data. I love maths, economics, and the environment.
+I am willing to have new experiences and unpopular decisions. Excited about vision 2030.  
