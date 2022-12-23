@@ -1,7 +1,7 @@
->**Note**: Please **fork** the current Udacity repository so that you will have a **remote** repository in **your** Github account. Clone the remote repository to your local machine. Later, as a part of the project "Post your Work on Github", you will push your proposed changes to the remote repository in your Github account.
+> Bikeshare project
 
 ### Date created
-19 Dec 2022
+20 Dec 2022
 
 ### Project Title
 Bikeshare
@@ -17,8 +17,13 @@ new_york_city.csv
 washington.csv
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
+https://www.w3schools.com/python/python_comments.asp
+https://www.openbookproject.net/books/bpp4awd/ch04.html
+https://www.w3schools.com/python/python_functions.asp
+https://satr.codes/courses/ZlKLfufzmW/view
+
 
 ### About me
- Data science student at University of Jeddah, I'm passionate about data. I love maths, economics, and the environment.
-I am willing to have new experiences and unpopular decisions. Excited about vision 2030.  
+ Data science student at Univesity of Jeddah, I'm passionate about data. I love maths, economics, and the environment.
+I am willing to have new experiences and unpopular decisions. Excited about vision 2030.
+
