@@ -6,6 +6,15 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
+def w():
+    print('Welcome to Bikeshare system')
+
+
+def info():
+
+    name = input('Enter user name')
+
+
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
@@ -24,7 +33,7 @@ def get_filters():
                     else:
                         print("Invalid input.\n Try again.")
                         continue
-                                            
+
     # TO DO: get user input for month (all, january, february, ... , june)
     while True:
                     month = input('Enter the month : \n ').lower()
@@ -59,19 +68,19 @@ def load_data(city, month, day):
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
-    
+
     """
     df = pd.read_csv(CITY_DATA[city])
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.weekday_name
     df['hour'] = df['Start Time'].dt.hour
-    
+
     if month != 'all':
           months = ['january', 'february', 'march', 'april', 'may', 'june']
           month = months.index(month) + 1
-          df = df[df['month'] == month]         
-               
+          df = df[df['month'] == month]
+
     if day != 'all':
             df = df[df['day_of_week'] == day.title()]
 
@@ -110,16 +119,16 @@ def station_stats(df):
     # TO DO: display most commonly used end station
     common_end_station = df['End Station'].value_counts().idxmax()
     print('Most common end station: ',common_end_station)
-     
+
 
     # TO DO: display most frequent combination of start station and end station trip
     common_start_end = df.groupby(['Start Station','End Station']).count()
     print('Most common combination of start and end station: ',common_start_end)
-    
+
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    
+
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
@@ -160,12 +169,12 @@ def user_stats(df):
        print('The earliest year of birth: ',earliest)
     except KeyError:
         print('There are "no year of birth" informations')
-    try:    
+    try:
        most_recent= int(df['Birth Year'].max())
        print('The most recent year of birth: ',most_recent)
     except KeyError:
         print('There are "no year of birth" informations')
-    try: 
+    try:
        common_year= int(df['Birth Year'].min())
        print('The most common year of birth: ',common_year)
     except KeyError:
@@ -173,10 +182,10 @@ def user_stats(df):
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    
-   #TO Display 5 rows from DataFrame to user 
+
+   #TO Display 5 rows from DataFrame to user
 def display_data(df):
-    
+
           view_data = input('\nWould you like to view 5 rows of individual trip data? Enter yes or no\n').lower()
           start_loc = 0
           while view_data == 'yes':
@@ -185,11 +194,11 @@ def display_data(df):
                       view_data = input("Do you wish to continue?: ").lower()
                       if view_data != 'yes':
                                           break
-          
+
           start_time = time.time()
           print("\nThis took %s seconds." % (time.time() - start_time))
-          print('-'*40)                
- 
+          print('-'*40)
+
 
 def main():
     while True:
