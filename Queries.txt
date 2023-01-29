@@ -1,0 +1,133 @@
+/*Q1:Create a query that lists each movie, the film category it is classified in, 
+and the number of times it has been rented out.*/
+
+
+SELECT  
+      t1.category_name , 
+      sum(t1.count_rental_id) AS rental_count
+FROM(
+   SELECT 
+      f.title AS film_title ,
+      c.name AS category_name ,
+      r.rental_id , count(*)AS count_rental_id
+  FROM Category c 
+  JOIN  Film_Category fc ON c.category_id = fc.category_id 
+  JOIN film f ON f.film_id = fc.film_id 
+  JOIN Inventory i ON f.film_id = i.film_id 
+  JOIN Rental r ON i.inventory_id = r.inventory_id
+  WHERE 
+       c.name IN('Animation','Children','Classics','Comedy','Family','Music')
+  GROUP BY 1,
+           2,
+           3
+           ORDER BY 4)t1
+  GROUP BY 1
+  ORDER BY 2;
+
+
+/*Q2:The average amount customer pays per a year on Children movie*/
+
+
+SELECT 
+      t1.cus ,
+      AVG(t1.year_total_amount) AS avg_total_amount
+FROM(
+      SELECT 
+             cu.customer_id AS cus,
+             c.name,
+             p.amount,
+             DATE_TRUNC('year', p.payment_date) as year,
+             SUM(p.amount) over (PARTITION BY DATE_TRUNC('year', p.payment_date) ORDER BY payment_date) AS year_total_amount
+      FROM Category c
+           JOIN film_category fc ON c.category_id = fc.category_id
+           JOIN Film f ON f.film_id = fc.film_id 
+           JOIN Inventory i ON f.film_id = i.film_id 
+           JOIN Rental r ON i.inventory_id = r.inventory_id
+           JOIN Payment p ON r.rental_id = p.rental_id 
+           JOIN Customer cu ON cu.customer_id = p.customer_id
+      WHERE C.NAME ='Children')t1
+GROUP BY 1
+ORDER BY 2;
+
+
+
+
+/*Q3:Count the Average number of rental for each movie based on the day.*/
+
+
+SELECT 
+       t1.name ,
+       t1.title,
+       AVG(t1.FILM_count) AS avg_film_rental
+
+FROM(
+     SELECT 
+            DATE_TRUNC('day',r.rental_date) AS r_rental_date,
+            c.name,
+            f.title, 
+            count(*) AS FILM_count
+     FROM Category c 
+          JOIN film_category fc ON c.category_id = fc.category_id 
+          JOIN Film f ON f.film_id = fc.film_id 
+          JOIN Inventory i ON  f.film_id = i.film_id 
+          JOIN Rental r ON i.inventory_id = r.inventory_id
+     GROUP BY 1,
+              2,
+             3)t1
+GROUP BY 1,
+         2
+ORDER BY 3 DESC;
+
+
+
+
+
+/*Q4:The Maximum rate of rental of a movie for each city*/
+
+
+WITH t1 AS (
+           SELECT c.first_name,
+                   c.last_name,
+                   c.first_name||' '||c.last_name AS FULL_NAME, 
+                   ci.city AS CITY_NAME,
+                   sum(r.rental_id) AS rental_sum
+     
+           FROM rental r 
+                JOIN Customer c ON c.customer_id =r.customer_id
+                JOIN Address a ON a.address_id = c.address_id
+                JOIN City ci ON ci.city_id = a.city_id
+           GROUP BY 1,
+                    2,
+                    4
+           ORDER BY 5 DESC),
+
+   t2 AS( 
+        SELECT  
+              CITY_NAME, 
+              MAX(rental_sum) AS MAX_RENTAL_SUM
+        FROM t1
+        GROUP BY 1)
+ SELECT t1.CITY_NAME,
+        t2.MAX_RENTAL_SUM
+ FROM t1 JOIN t2
+ ON t1.CITY_NAME=t2.CITY_NAME
+ WHERE t2.MAX_RENTAL_SUM >=300000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
