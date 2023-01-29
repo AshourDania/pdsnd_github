@@ -7,7 +7,8 @@
 Investigate into DVD Rental Database 
 
 ### Description
-
+doing queries by SQL on a DVD rental database 
+to analyze the revenue generate, profit, and future opportunities
 
 ### Files used
 DVD Rental Database 
