@@ -13,3 +13,5 @@ to analyze the revenue generate, profit, and future opportunities
 ### Files used
 DVD Rental Database 
 
+### Credits 
+https://www.w3schools.com/sql/
