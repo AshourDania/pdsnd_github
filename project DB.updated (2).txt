@@ -113,11 +113,6 @@ select* from StudentReason;
 select* from VaccinatedStudent;
 
 ----------------------------------------
---يزيد اللقاح ب 1 للي الاي دي حقهم يبدأ ب12 يعني طلاب الصف السادس
-update VaccinatedStudent
-set Dose_No=Dose_No+1
-where Stu_ID LIKE '12%'
--------------------------
 --Shows the names of the students who have a legal reason for not completing the doses or
 for not taking them in the first place.
  SELECT Stu_Name
