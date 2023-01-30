@@ -1,0 +1,211 @@
+CREATE TABLE Student (
+Stu_ID varchar2(5) not null primary key, Stu_Name varchar2(30) not null, Stu_Age 
+number(2),
+Stu_Level varchar(15),
+Stu_Group varchar(1)
+);
+
+CREATE TABLE Vaccine (
+Vac_ID varchar2(5) NOT NULL primary key,
+Vac_Na varchar2(30),
+Perio varchar2(10)
+);
+
+CREATE TABLE Dose (
+Dose_ID varchar2(3) NOT NULL primary key,
+Dose_Na varchar2(30) NOT NULL
+);
+
+CREATE TABLE Symptoms (
+S_ID NUMBER (4) NOT NULL primary key, Description varchar(100),
+Dose_ID varchar2(3),
+FOREIGN KEY (Dose_ID) REFERENCES Dose(Dose_ID) );
+
+CREATE TABLE Reason (
+Rsn_ID varchar2(5) NOT NULL primary key,
+Rsn_Typ varchar2(30));
+
+CREATE TABLE StudentReason (
+Rsn_ID varchar2(5),
+Rsn_Des varchar(50),
+Stu_ID varchar2(5),
+FOREIGN KEY (Rsn_ID) REFERENCES Reason(Rsn_ID),
+FOREIGN KEY (Stu_ID) REFERENCES Student(Stu_ID) );
+
+CREATE TABLE VaccinatedStudent (
+Dose_ID varchar2(3),
+Dose_No number(3),
+Stu_ID varchar2(5),
+Vac_ID varchar2(5),
+FOREIGN KEY (Dose_ID) REFERENCES Dose(Dose_ID), 
+FOREIGN KEY (Stu_ID) REFERENCES Student(Stu_ID), 
+FOREIGN KEY (Vac_ID) REFERENCES Vaccine (Vac_ID) );
+
+-----------------------------------------
+
+select * from Student;
+select* from Vaccine;
+select* from Dose;
+select* from Symptoms;
+select* from Reason;
+select* from StudentReason;
+select* from VaccinatedStudent;
+
+--------------------------------------
+
+insert into student (Stu_ID, Stu_Name, Stu_Age, Stu_Level,Stu_Group) values (70764, 'rahaf', 7, 'first grade','A');
+insert into student (Stu_ID, Stu_Name, Stu_Age, Stu_Level,Stu_Group) values (80394, 'nour', 8, 'second grade','A');
+insert into student (Stu_ID, Stu_Name, Stu_Age, Stu_Level,Stu_Group) values (90575, 'samar', 9, 'third grade','A');
+insert into student (Stu_ID, Stu_Name, Stu_Age, Stu_Level,Stu_Group) values (10345, 'sara', 10, 'forth grade','A');
+insert into student (Stu_ID, Stu_Name, Stu_Age, Stu_Level,Stu_Group) values (11543, 'shroog', 11, 'fifth grade','A');
+insert into student (Stu_ID, Stu_Name, Stu_Age, Stu_Level,Stu_Group) values (12354, 'yara', 12, 'sixth grade','A');
+
+
+insert into student (Stu_ID, Stu_Name, Stu_Age, Stu_Level,Stu_Group) values (70273, 'leen', 7, 'first grade','B');
+insert into student (Stu_ID, Stu_Name, Stu_Age, Stu_Level,Stu_Group) values (80639, 'maram', 8, 'second grade','B');
+insert into student (Stu_ID, Stu_Name, Stu_Age, Stu_Level,Stu_Group) values (90502, 'lama', 9, 'third grade','B');
+insert into student (Stu_ID, Stu_Name, Stu_Age, Stu_Level,Stu_Group) values (10753, 'muna', 10, 'forth grade','B');
+insert into student (Stu_ID, Stu_Name, Stu_Age, Stu_Level,Stu_Group) values (11376, 'dalal', 11, 'fifth grade','B');
+insert into student (Stu_ID, Stu_Name, Stu_Age, Stu_Level,Stu_Group) values (12790, 'abeer', 12, 'sixth grade','B');
+
+-------------------------------------
+
+insert into vaccine (vac_id, vac_na, perio) values (77889, 'pfizer', 2);
+insert into vaccine (vac_id, vac_na, perio) values (88990, 'moderna', 2);
+
+-------------------------------------
+
+insert into dose (dose_id, dose_na) values (111, 'first');
+insert into dose (dose_id, dose_na) values (222, 'second');
+
+-------------------------------------
+
+insert into Symptoms (S_ID,Description, dose_id) values (674,'fever',111);
+insert into Symptoms (S_ID,Description, dose_id) values (765,'headache',222);
+
+-------------------------------------
+
+insert into Reason (Rsn_ID, Rsn_Typ) values (2233,'legal');
+insert into Reason (Rsn_ID, Rsn_Typ) values (2244,'illegal');
+
+-------------------------------------
+insert into StudentReason (Rsn_ID, Rsn_Des, Stu_ID) values (2233, 'underAge', 70764);
+insert into StudentReason (Rsn_ID, Rsn_Des, Stu_ID) values (2233, 'respiratory diseases', 90575);
+insert into StudentReason (Rsn_ID, Rsn_Des, Stu_ID) values (2233,'respiratory diseases',12790);
+insert into StudentReason (Rsn_ID, Rsn_Des, Stu_ID) values (2244, 'parental opposition', 80639);
+insert into StudentReason (Rsn_ID, Rsn_Des, Stu_ID) values (2244,'parental opposition',10753);
+insert into StudentReason (Rsn_ID, Rsn_Des, Stu_ID) values (2244,'parental opposition',11543);
+-------------------------------------
+
+insert into VaccinatedStudent  (Dose_ID , Dose_No , Stu_ID, Vac_ID  ) values (111, 1, 80394,77889 );
+insert into VaccinatedStudent  (Dose_ID , Dose_No , Stu_ID, Vac_ID  ) values (111,1 ,90502 ,88990);
+insert into VaccinatedStudent  (Dose_ID , Dose_No , Stu_ID, Vac_ID  ) values (111,1,10345,77889);
+insert into VaccinatedStudent  (Dose_ID , Dose_No , Stu_ID, Vac_ID  ) values (222,2,12354 ,88990);
+insert into VaccinatedStudent  (Dose_ID , Dose_No , Stu_ID, Vac_ID  ) values (222,2,70273  ,77889);
+insert into VaccinatedStudent  (Dose_ID , Dose_No , Stu_ID, Vac_ID  ) values (222,2 ,11376,88990  );
+
+select * from Student;
+select* from Vaccine;
+select* from Dose;
+select* from Symptoms;
+select* from Reason;
+select* from StudentReason;
+select* from VaccinatedStudent;
+
+----------------------------------------
+--يزيد اللقاح ب 1 للي الاي دي حقهم يبدأ ب12 يعني طلاب الصف السادس
+update VaccinatedStudent
+set Dose_No=Dose_No+1
+where Stu_ID LIKE '12%'
+-------------------------
+--Shows the names of the students who have a legal reason for not completing the doses or
+for not taking them in the first place.
+ SELECT Stu_Name
+  FROM Student
+ WHERE Student.Stu_ID IN (SELECT StudentReason.Stu_ID
+                FROM StudentReason
+               WHERE Rsn_ID =2244);
+----------------------------
+--Display how many doses student took based on the vaccine ID which represent the vaccine
+type, phfizer or moderna in a new column name.
+SELECT Vac_ID, COUNT(Dose_No) AS Num_Of_Doses
+FROM VaccinatedStudent
+GROUP BY Vac_ID
+--------------------------
+-- Show students ID with symptoms
+select Description,Stu_ID
+From Symptoms
+join VaccinatedStudent
+ON Symptoms.Dose_ID = VaccinatedStudent.Dose_ID
+ORDER BY Symptoms.S_ID
+---------------------------------
+--Procedure to Add new student to the record list 
+CREATE OR REPLACE PROCEDURE AddNewStudent(v_ID student.Stu_ID%Type, v_Name student.Stu_Name%Type,
+v_Age student.Stu_Age%Type, v_Level student.Stu_Level%Type, v_Group student.Stu_Group%Type)
+AS
+BEGIN
+
+INSERT INTO student(Stu_ID,Stu_Name, Stu_Age,Stu_Level,Stu_Group)
+VALUES(v_ID,v_Name,v_Age ,v_Level,v_Group);
+
+END AddNewStudent;
+
+EXEC AddNewStudent(11253,'Joud',8,'second grade','A');
+---------------------------------------------------------
+--This procedure to return the list of students based on the group A or B
+Create or Replace procedure GroupCheck(
+v_Group student.Stu_Group%Type)AS
+
+Cursor exGroup IS
+SELECT Stu_ID, Stu_Name, Stu_Age, Stu_Level
+FROM student 
+WHERE Stu_Group = v_Group;
+
+BEGIN 
+FOR exCursor IN exGroup Loop
+
+DBMS_output.put_line(exCursor.Stu_Name||' '||exCursor.Stu_Age||' '||exCursor.Stu_Level);
+
+END LOOP;
+
+END GroupCheck;
+
+EXEC GroupCheck('A');
+--------------------------------------------
+--This is Trigger to update the number of doses for grade six student.
+CREATE TABLE Temp_VaccinatedStudent(
+Dose_ID varchar2(3) NOT NULL,
+OldDose_No number(3) NOT NULL,
+NewDose_No number(3) NOT NULL,
+Stu_ID varchar2(5) NOT NULL,
+Vac_ID varchar2(5) NOT NULL);
+
+--
+CREATE OR REPLACE Trigger NewVaccinatedStudent
+before update of Dose_No on VaccinatedStudent
+FOR EACH ROW 
+BEGIN
+
+INSERT INTO  Temp_VaccinatedStudent Values(:new.Dose_ID , :old.Dose_No, :new.Dose_No, :new.Stu_ID,:new.Vac_ID);
+DBMS_output.put_line('Old Number of Doses: '|| :old.Dose_No);
+DBMS_output.put_line('New Number of Doses: '|| :new.Dose_No);
+
+END NewVaccinatedStudent;
+
+update VaccinatedStudent
+set Dose_No=Dose_No+1
+where Stu_ID LIKE '12%';
+------------------------------------------------
+--This Procedure to Change the Reason for not Taking the vaccine
+
+Create or Replace procedure UpdateStudentReason(reasonID StudentReason.Rsn_ID%Type,
+reasonDes StudentReason.Rsn_Des%Type,studentID StudentReason.Stu_ID%Type) AS 
+BEGIN 
+UPDATE StudentReason SET Rsn_Des = reasonDes
+Where Rsn_ID=reasonID AND Stu_ID=studentID;
+
+END UpdateStudentReason;
+
+EXEC UpdateStudentReason(2233,'Vccine Allergy',90575);
+
+select* from StudentReason;
